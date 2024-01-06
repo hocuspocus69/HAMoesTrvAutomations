@@ -1,6 +1,6 @@
 blueprint:
   name: Calibrate TRV external temperature
-  description: Calibrate Moest BRT-100 TRV internal temperature according to external temperature sensor
+  description: Calibrate Moes BRT-100 TRV internal temperature according to external temperature sensor
   domain: automation
   input:
     external_temp:
@@ -14,7 +14,7 @@ blueprint:
           - temperature
           multiple: false
     climate_names:
-      name: Climate entries
+      name: TRV entries
       description: This will be the MOES TRVs that will be calibrated using the external sensor.
       selector:
         entity:
@@ -32,7 +32,7 @@ blueprint:
           min: 0
           max: 2
           step: 0.1
-  source_url: https://github.com/LukasVyhlidka/HAMoesTrvAutomations/blob/main/blueprints/calib_trv_external_temp.yaml
+  source_url: https://github.com/hocuspocus69/HAMoesTrvAutomations/edit/main/blueprints/calib_trv_external_temp.yaml
 alias: Calibrate Moes TRVs
 description: ''
 variables:
@@ -69,7 +69,7 @@ action:
         climate_name: "{{ repeat.item }}"
         device_calib: "number.{{ climate_name.removeprefix('climate.') }}_local_temperature_calibration"
         external_temp: "{{ states(external_temperature) | float() }}"
-        local_temp: "{{ state_attr(climate_name, 'current_temperature') | float() }}"
+        local_temp: "{{ states(climate_name, 'current_temperature') | float() }}"
         target_temp: "{{ state_attr(climate_name, 'temperature') | float() }}"
         actual_calib: "{{ states(device_calib) | float() }}"
         temp_diff: "{{ external_temp - target_temp }}"
