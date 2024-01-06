@@ -18,6 +18,7 @@ blueprint:
       description: This will be the MOES TRVs that will be calibrated using the external sensor.
       selector:
         entity:
+          integration: localtuya
           domain:
           - number
           multiple: true
