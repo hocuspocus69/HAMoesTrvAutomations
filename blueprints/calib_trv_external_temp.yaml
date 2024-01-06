@@ -19,7 +19,7 @@ blueprint:
       selector:
         entity:
           domain:
-          - climate
+          - number
           multiple: true
     offset_factor:
       name: Calibration Offset Factor
